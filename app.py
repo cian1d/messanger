@@ -39,6 +39,8 @@ def clear_messages():
         json.dump([], f)
     return redirect('/')
 
+# if __name__ == '__main__':
+#     app.run(debug=True)
 
 if __name__ == '__main__':
     # Пытаемся взять порт из переменной окружения, иначе ставим 80

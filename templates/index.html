@@ -2,29 +2,143 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>Сообщения</title>
+    <title>Растительная клетка — Википедия</title>
     <style>
-        body { font-family: sans-serif; max-width: 600px; margin: 40px auto; padding: 20px; line-height: 1.6; }
-        form { margin-bottom: 30px; }
-        textarea { width: 100%; height: 80px; margin-bottom: 10px; display: block; }
-        .message { border-bottom: 1px solid #eee; padding: 10px 0; }
-        button { background: #000; color: #fff; border: none; padding: 10px 20px; cursor: pointer; }
+        body { font-family: sans-serif; background-color: #f6f6f6; margin: 0; padding: 0; color: #202122; }
+
+        /* ВЕРХНЯЯ ШАПКА */
+        .header { height: 40px; display: flex; justify-content: flex-end; align-items: center; padding: 0 20px; font-size: 0.75em; color: #0645ad; }
+        .header span { margin-left: 15px; cursor: pointer; }
+        .header span.user { color: #202122; font-weight: bold; }
+
+        .wrapper { display: flex; max-width: 1250px; margin: 0 auto; position: relative; }
+
+        /* ЛЕВАЯ КОЛОНКА С ЛОГОТИПОМ */
+        .sidebar-container { width: 160px; padding: 0 10px; display: flex; flex-direction: column; align-items: center; }
+        .logo { width: 120px; height: 120px; margin: 10px 0; background: url('https://ru.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-ru.svg') no-content; background-size: contain; background-repeat: no-repeat; }
+        /* Эмуляция круглого лого-шара */
+        .logo-sphere { width: 100px; height: 100px; background: url('https://upload.wikimedia.org/wikipedia/commons/b/b3/Wikipedia-logo-v2-en.svg'); background-size: contain; margin-bottom: 10px; }
+
+        .sidebar-links { font-size: 0.75em; color: #0645ad; line-height: 1.8; width: 100%; border-top: 1px solid #a2a9b1; padding-top: 10px; }
+        .sidebar-links b { color: #54595d; display: block; margin-top: 10px; }
+
+        /* ОСНОВНОЙ КОНТЕНТ */
+        .main-content {
+            flex: 1;
+            background: white;
+            border: 1px solid #a2a9b1;
+            border-right: none;
+            padding: 20px 40px;
+            min-height: 100vh;
+        }
+
+        /* ВКЛАДКИ СВЕРХУ СТАТЬИ */
+        .tabs { display: flex; margin-bottom: -1px; margin-left: -40px; padding-left: 40px; }
+        .tab { padding: 8px 15px; border: 1px solid transparent; font-size: 0.8em; color: #0645ad; cursor: pointer; }
+        .tab.active { background: white; border: 1px solid #a2a9b1; border-bottom-color: white; color: #202122; }
+
+        h1 { font-family: serif; font-size: 1.8em; border-bottom: 1px solid #a2a9b1; margin-top: 10px; font-weight: normal; }
+
+        /* Остальные стили из предыдущего шага (инфобокс, чат и т.д.) */
+        .infobox { float: right; width: 270px; border: 1px solid #a2a9b1; background: #f8f9fa; margin-left: 1em; padding: 5px; font-size: 0.9em; }
+        .edit-section { margin-top: 40px; border: 1px solid #a2a9b1; padding: 20px; background: #f8f9fa; }
+        textarea { width: 100%; border: 1px solid #a2a9b1; padding: 8px; }
+        .wiki-btn { background: #f8f9fa; border: 1px solid #a2a9b1; padding: 5px 12px; cursor: pointer; font-weight: bold; }
     </style>
 </head>
-<hr>
-<form action="/clear" method="POST" onsubmit="return confirm('Вы уверены, что хотите удалить все сообщения?');">
-    <button type="submit" style="background: #d9534f;">Очистить все сообщения</button>
-</form>
 <body>
-    <h2>Оставить сообщение</h2>
-    <form method="POST">
-        <textarea name="message" placeholder="Ваше сообщение..." required></textarea>
-        <button type="submit">Отправить</button>
-    </form>
+<div class="header">
+    <span class="user">Вы не представились системе</span>
+    <span>Обсуждение</span>
+    <span>Вклад</span>
+    <span>Создать учётную запись</span>
+    <span>Войти</span>
+</div>
 
-    <h2>История</h2>
-    {% for msg in messages|reverse %}
-        <div class="message">{{ msg.text }}</div>
-    {% endfor %}
+<div class="wrapper">
+    <div class="sidebar-container">
+        <div class="logo-sphere"></div>
+        <img src="https://ru.wikipedia.org/static/images/mobile/copyright/wikipedia-wordmark-ru.svg" width="120"
+             alt="Wikipedia">
+        <div class="sidebar-links">
+            Заглавная страница<br>Рубрикация<br>Избранные статьи
+            <b>Участие</b>
+            Сообщить об ошибке<br>Сообщество<br>Пожертвовать
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="tabs">
+            <div class="tab active">Статья</div>
+            <div class="tab">Обсуждение</div>
+            <div style="flex-grow: 1;"></div>
+            <div class="tab active" style="border-bottom-color: white;">Читать</div>
+            <div class="tab"><form action="/clear" method="POST">
+                <button>Править код</button>
+            </form></div>
+            <div class="tab">История</div>
+        </div>
+
+        <h1>Растительная клетка</h1>
+
+        <div class="infobox">
+            <div style="text-align: center; font-weight: bold; background: #ccf; padding: 5px;">Растительная клетка
+            </div>
+            <img src="static/Plant_cell_structure-en.svg.png" width="100%">
+            <p style="font-size: 0.8em; padding: 5px;">Типичная структура растительной клетки.</p>
+        </div>
+
+        <p>Материал из Википедии — свободной энциклопедии</p>
+
+        <p><b>Растительная клетка</b> — тип <a href="#">эукариотических</a> клеток, для которых характерны специфические
+            особенности метаболизма и строения. В отличие от клеток животных и грибов, растительные клетки способны к <a
+                    href="#">фотоавтотрофному</a> питанию благодаря наличию хлоропластов.</p>
+
+        <h2>Морфологические особенности</h2>
+        <p>Ключевым отличием является наличие жёсткой <b>клеточной стенки</b>, расположенной снаружи от
+            цитоплазматической мембраны. Она состоит преимущественно из <a href="#">целлюлозы</a> и выполняет защитную и
+            структурную функции, обеспечивая тургорное давление.</p>
+
+
+        <h3>Основные органоиды:</h3>
+        <ul>
+            <li><b>Хлоропласты:</b> двумембранные органоиды, содержащие пигмент хлорофилл. В них происходит
+                преобразование энергии света в энергию химических связей.
+            </li>
+            <li><b>Вакуоль:</b> крупная полость, заполненная клеточным соком. У зрелых клеток вакуоль может занимать до
+                90% всего объёма, оттесняя ядро к периферии.
+            </li>
+            <li><b>Плазмодесмы:</b> цитоплазматические мостики, соединяющие соседние клетки и обеспечивающие транспорт
+                веществ между ними.
+            </li>
+        </ul>
+
+        <h2>Физиология</h2>
+        <p>Рост растительной клетки осуществляется в основном за счёт растяжения под действием осмотического давления.
+            Накопление воды в центральной вакуоли создает напряжение, которое фиксируется жесткой стенкой, что позволяет
+            растениям поддерживать вертикальное положение без скелета.</p>
+
+        <div style="background: #f8f9fa; border: 1px solid #a2a9b1; padding: 10px; margin: 15px 0;">
+            <b>Примечание:</b> В высших растениях клетки дифференцированы и образуют ткани: паренхиму, колленхиму,
+            склеренхиму, а также проводящие ткани (ксилему и флоэму).
+        </div>
+
+        <div class="edit-section">
+            <form method="POST" style="margin-top: 20px;">
+                <textarea name="message" rows="3" placeholder="Введите текст правки..."></textarea><br>
+                <button type="submit" class="wiki-btn">Сохранить изменения</button>
+            </form>
+
+            <hr>
+
+            <h2>Примечания рецензентов</h2>
+            {% for msg in messages|reverse %}
+            <div style="margin-bottom: 10px; border-bottom: 1px solid #ddd; padding-bottom: 5px;">
+                <span style="color: #0645ad; font-weight: bold;">Editor_Bot:</span> {{ msg.text }}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
 </body>
 </html>
