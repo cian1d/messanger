@@ -88,11 +88,11 @@ app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-if __name__ == '__main__':
-    app.run(debug=True)
-
 # if __name__ == '__main__':
-#     # Пытаемся взять порт из переменной окружения, иначе ставим 80
-#     port = int(os.environ.get("PORT", 80))
-#     print(f"Приложение запускается на порту {port}")
-#     serve(app, host='0.0.0.0', port=port)
+#     app.run(debug=True)
+
+if __name__ == '__main__':
+    # Пытаемся взять порт из переменной окружения, иначе ставим 80
+    port = int(os.environ.get("PORT", 80))
+    print(f"Приложение запускается на порту {port}")
+    serve(app, host='0.0.0.0', port=port)
