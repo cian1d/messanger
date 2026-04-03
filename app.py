@@ -1,3 +1,4 @@
+from waitress import serve
 from flask   import Flask, render_template, request, redirect
 import json
 import os
@@ -33,4 +34,7 @@ def index():
 
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    # Пытаемся взять порт из переменной окружения, иначе ставим 80
+    port = int(os.environ.get("PORT", 80))
+    print(f"Приложение запускается на порту {port}")
+    serve(app, host='0.0.0.0', port=port)
