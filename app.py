@@ -3,7 +3,7 @@ import json
 import os
 
 app = Flask(__name__)
-DATA_FILE = 'messages.json'
+DATA_FILE = 'data/messages.json'
 
 
 def load_messages():
