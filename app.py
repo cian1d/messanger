@@ -32,6 +32,13 @@ def index():
     messages = load_messages()
     return render_template('index.html', messages=messages)
 
+@app.route('/clear', methods=['POST'])
+def clear_messages():
+    # Перезаписываем файл пустым списком
+    with open(DATA_FILE, 'w', encoding='utf-8') as f:
+        json.dump([], f)
+    return redirect('/')
+
 
 if __name__ == '__main__':
     # Пытаемся взять порт из переменной окружения, иначе ставим 80

@@ -11,6 +11,10 @@
         button { background: #000; color: #fff; border: none; padding: 10px 20px; cursor: pointer; }
     </style>
 </head>
+<hr>
+<form action="/clear" method="POST" onsubmit="return confirm('Вы уверены, что хотите удалить все сообщения?');">
+    <button type="submit" style="background: #d9534f;">Очистить все сообщения</button>
+</form>
 <body>
     <h2>Оставить сообщение</h2>
     <form method="POST">
