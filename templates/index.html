@@ -44,15 +44,57 @@
         .edit-section { margin-top: 40px; border: 1px solid #a2a9b1; padding: 20px; background: #f8f9fa; }
         textarea { width: 100%; border: 1px solid #a2a9b1; padding: 8px; }
         .wiki-btn { background: #f8f9fa; border: 1px solid #a2a9b1; padding: 5px 12px; cursor: pointer; font-weight: bold; }
+
+        .infobox {
+            float: right; /* Прижимаем к правому краю */
+            width: 270px; /* Ширина карточки */
+            margin: 0 0 1em 1em; /* Отступы: снизу и слева, чтобы текст не прилипал */
+            border: 1px solid #a2a9b1;
+            background: #f8f9fa;
+            padding: 5px;
+            font-size: 0.9em;
+        }
+
+        .article-section {
+            display: flex; /* Включаем флексбокс */
+            align-items: flex-start; /* Прижимаем контент к верху */
+            gap: 20px; /* Расстояние между текстом и инфобоксом */
+            margin-bottom: 20px;
+        }
+
+        .article-text {
+            flex: 1; /* Текст забирает всё свободное место слева */
+        }
+
+        /* Старый infobox теперь просто вложен в контейнер, float ему больше не нужен */
+        .infobox {
+            width: 270px;
+            flex-shrink: 0; /* Чтобы картинка не сжималась */
+            border: 1px solid #a2a9b1;
+            background: #f8f9fa;
+            padding: 5px;
+            font-size: 0.9em;
+        }
+
+        .msg-container {
+            margin-bottom: 15px; /* Отступ снизу между сообщениями */
+            padding: 10px;       /* Внутренний отступ, чтобы текст не прилипал к краям */
+            border-left: 3px solid #36b; /* Синяя полоска слева, как в Википедии */
+            background-color: #f8f9fa;   /* Легкий фон для выделения */
+            font-size: 0.95em;
+            line-height: 1.6;    /* Межстрочный интервал для читаемости */
+        }
     </style>
 </head>
 <body>
 <div class="header">
     <span class="user">Вы не представились системе</span>
-    <span>Обсуждение</span>
     <span>Вклад</span>
     <span>Создать учётную запись</span>
     <span>Войти</span>
+    <span><form action="/clear" method="POST">
+                    <button>Очистить кэш</button>
+                </form></span>
 </div>
 
 <div class="wrapper">
@@ -70,12 +112,8 @@
     <div class="main-content">
         <div class="tabs">
             <div class="tab active">Статья</div>
-            <div class="tab">Обсуждение</div>
             <div style="flex-grow: 1;"></div>
             <div class="tab active" style="border-bottom-color: white;">Читать</div>
-            <div class="tab"><form action="/clear" method="POST">
-                <button>Править код</button>
-            </form></div>
             <div class="tab">История</div>
         </div>
 
@@ -113,30 +151,70 @@
             </li>
         </ul>
 
-        <h2>Физиология</h2>
-        <p>Рост растительной клетки осуществляется в основном за счёт растяжения под действием осмотического давления.
-            Накопление воды в центральной вакуоли создает напряжение, которое фиксируется жесткой стенкой, что позволяет
-            растениям поддерживать вертикальное положение без скелета.</p>
+        <div class="main-content">
+            <h1>Растительная клетка</h1>
+            <p>Материал из Википедии — свободной энциклопедии</p>
 
-        <div style="background: #f8f9fa; border: 1px solid #a2a9b1; padding: 10px; margin: 15px 0;">
-            <b>Примечание:</b> В высших растениях клетки дифференцированы и образуют ткани: паренхиму, колленхиму,
-            склеренхиму, а также проводящие ткани (ксилему и флоэму).
-        </div>
+            <div class="article-section">
+                <div class="article-text">
+                    <p><b>Растительная клетка</b> — тип <a href="#">эукариотических</a> клеток, для которых характерны
+                        специфические особенности метаболизма и строения. В отличие от клеток животных и грибов,
+                        растительные клетки способны к фотоавтотрофному питанию.</p>
 
-        <div class="edit-section">
-            <form method="POST" style="margin-top: 20px;">
-                <textarea name="message" rows="3" placeholder="Введите текст правки..."></textarea><br>
-                <button type="submit" class="wiki-btn">Сохранить изменения</button>
-            </form>
+                    <h2>Морфологические особенности</h2>
+                    <p>Ключевым отличием является наличие жёсткой <b>клеточной стенки</b>, расположенной снаружи от
+                        цитоплазматической мембраны. Она состоит преимущественно из целлюлозы и выполняет защитную
+                        функцию.</p>
 
-            <hr>
+                    <p>Согласно теории <b>симбиогенеза</b>, растительная клетка возникла в результате поглощения древней
+                        цианобактерии гетеротрофным эукариотом. Этот процесс привел к формированию первичных пластид.
+                    </p>
 
-            <h2>Примечания рецензентов</h2>
-            {% for msg in messages|reverse %}
-            <div style="margin-bottom: 10px; border-bottom: 1px solid #ddd; padding-bottom: 5px;">
-                <span style="color: #0645ad; font-weight: bold;">Editor_Bot:</span> {{ msg.text }}
+                    <div style="border-left: 5px solid #eaecf0; padding: 10px 20px; background: #f8f9fa; margin: 20px 0;">
+                        <i>«Эволюция растительных клеток является фундаментом для существования всей биосферы
+                            Земли...»</i>
+                        <br><small>— из трудов Н. И. Вавилова</small>
+                    </div>
+                </div>
+
+                <div class="infobox">
+                    <div style="text-align: center; font-weight: bold; background: #ccf; padding: 5px;">Растительная
+                        клетка
+                    </div>
+                    <img src="static/547fe6eb0ed7c0fd6cbe8d5be2465757.jpg" width="100%">
+
+                    <div style="margin-top: 15px; border-top: 1px solid #a2a9b1; padding-top: 5px;">
+                        <b style="font-size: 0.9em;">Дополнительные материалы:</b>
+                        <ul style="padding-left: 20px; font-size: 0.85em; margin-top: 5px;">
+                            {% for file in files %}
+                            <li><a href="/uploads/{{ file }}" target="_blank" style="color: #0645ad;">{{ file }}</a>
+                            </li>
+                            {% else %}
+                            <li style="color: #777;">Информации нет</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
             </div>
-            {% endfor %}
+
+            <div class="edit-section">
+                <h2>Рецензии</h2>
+                <form method="POST" enctype="multipart/form-data">
+                    <textarea name="message" rows="3"></textarea><br>
+                    <div style="margin: 10px 0; font-size: 0.8em;">
+                        <label for="file-upload" style="color: #0645ad; cursor: pointer;">Файлы</label>
+                        <input id="file-upload" name="file" type="file" style="display: none;"
+                               onchange="this.previousElementSibling.innerText = 'Выбрано: ' + this.files[0].name">
+                    </div>
+                    <button type="submit" class="wiki-btn">Рецензировать</button>
+                </form>
+                <hr>
+                {% for msg in messages|reverse %}
+                <div class="msg-container">
+                    <span class="msg-user"><b>Рецензент</b></span>: {{ msg.text }}
+                </div>
+                {% endfor %}
+            </div>
         </div>
     </div>
 </div>
